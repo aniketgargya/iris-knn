@@ -22,8 +22,8 @@ def returnColors(inputElement):
         return "purple"
 
 
-x_vals = list(map(createReturnListIndex(2), irisFlowers))
-y_vals = list(map(createReturnListIndex(3), irisFlowers))
+x_vals = list(map((lambda x: x[2]), irisFlowers))
+y_vals = list(map((lambda x: x[3]), irisFlowers))
 color_vals = list(map(returnColors, irisFlowers))
 
 plt.scatter(x_vals, y_vals, color=color_vals)

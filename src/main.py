@@ -1,9 +1,8 @@
-import matplotlib.pyplot as plt
 import pandas as pd
 import math
 import copy
 
-k = 2
+k = 5
 
 irisFlowers = pd.read_csv("iris.csv").values.tolist()
 
@@ -24,13 +23,6 @@ train = setosa_train + versicolor_train + virginica_train
 test = setosa_test + versicolor_test + virginica_test
 
 
-def genereateDistanceOfFlowerFunction(testFlower):
-    def distanceOfFlower(trainFlower):
-        return distance(testFlower, trainFlower)
-
-    return distanceOfFlower
-
-
 def distance(a, b):
     d = math.sqrt(
         ((a[0] - b[0]) ** 2)
@@ -43,7 +35,7 @@ def distance(a, b):
 
 for testFlower in test:
     trainFlowers = copy.deepcopy(train)
-    trainFlowers.sort(key=genereateDistanceOfFlowerFunction(testFlower))
+    trainFlowers.sort(key=(lambda x: distance(testFlower, x)))
     predictions = [0, 0, 0]
     for trainFlower in trainFlowers[0:k]:
         if trainFlower[4] == "setosa":
